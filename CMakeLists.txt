@@ -548,6 +548,8 @@ if(${OPENSIM_COPY_SIMBODY})
     install(FILES       ${SIMBODY_ARCHIVE_FILES}
             DESTINATION "${OPENSIM_INSTALL_ARCHIVEDIR}")
 
+    # TODO install(TARGETS SimTKcommon DESTINATION lib)
+
     # On Windows, we must copy Simbody libraries to the OpenSim build directory
     # so that the tests and examples can run without modifying the PATH
     # (that is, put Simbody's dll's in the same directory as OpenSim's
