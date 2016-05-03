@@ -102,15 +102,7 @@ if(NOT ${_SIMBODY_IS_COPIED_INTO_OPENSIM})
         PATHS "@Simbody_ROOT_DIR@"
         NO_MODULE NO_DEFAULT_PATH)
 else()
-    # If we copied over Simbody libraries/header into the OpenSim installation,
-    # then we assume that the machine on which this file is being read does
-    # *not* have a standalone installation of Simbody. We must manually create
-    # IMPORTED targets to represent the Simbody libraries that come with
-    # OpenSim.
-    # TODO windows: SONAME is unnecessary.
-    # TODO IMPLIB
-    # TODO Linux
-    # TODO RPATH
-    # TODO multiple configurations.
-    @OPENSIM_COPY_SIMBODY_IMPORTED_TARGETS@
+    find_package(Simbody @SIMBODY_VERSION_TO_USE@ REQUIRED
+        PATHS "${CMAKE_CURRENT_LIST_DIR}"
+        NO_MODULE NO_DEFAULT_PATH)
 endif()

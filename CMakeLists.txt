@@ -150,19 +150,19 @@ else()
 
     # Set the variables that would have otherwise been set by GNUInstallDirs.
     set(CMAKE_INSTALL_BINDIR bin)
-    set(CMAKE_INSTALL_INCLUDEDIR sdk/include)
-    set(CMAKE_INSTALL_LIBDIR sdk/lib)
-    set(CMAKE_INSTALL_DOCDIR sdk/doc)
+    set(CMAKE_INSTALL_INCLUDEDIR include)
+    set(CMAKE_INSTALL_LIBDIR lib)
+    set(CMAKE_INSTALL_DOCDIR doc)
     # SYSCONFDIR holds read-only single-machine machine-dependent data.
     set(CMAKE_INSTALL_SYSCONFDIR sdk)
 
     set(OPENSIM_INSTALL_ARCHIVEDIR "${CMAKE_INSTALL_LIBDIR}")
     set(OPENSIM_INSTALL_CMAKEDIR cmake)
-    set(OPENSIM_INSTALL_PYTHONDIR sdk/python)
-    set(OPENSIM_INSTALL_JAVAJARDIR sdk/Java)
-    set(OPENSIM_INSTALL_JAVASRCDIR sdk/Java)
-    set(OPENSIM_INSTALL_CPPEXDIR sdk/APIExamples)
-    set(OPENSIM_INSTALL_SCRIPTSDIR sdk/Scripts)
+    set(OPENSIM_INSTALL_PYTHONDIR python)
+    set(OPENSIM_INSTALL_JAVAJARDIR Java)
+    set(OPENSIM_INSTALL_JAVASRCDIR Java)
+    set(OPENSIM_INSTALL_CPPEXDIR APIExamples)
+    set(OPENSIM_INSTALL_SCRIPTSDIR Scripts)
 
 endif()
 
@@ -514,6 +514,11 @@ if(${OPENSIM_COPY_SIMBODY})
     # Install Simbody headers into OpenSim installation.
     install(DIRECTORY "${Simbody_INCLUDE_DIR}/"
             DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/Simbody")
+
+    # Install Simbody cmake files into OpenSim installation.
+    # Simbody installation should be relocatable
+    install(DIRECTORY "${Simbody_ROOT_DIR}/cmake" #TODO find proper one from SimbodyConfig.cmake ?
+            DESTINATION "${OPENSIM_INSTALL_CMAKEDIR}/..") # TODO check if this is general enough :)
 
     # Figure out which Simbody files need to be installed in the /bin
     # directory and which in the lib directory. Executables go in /bin on all
